@@ -1,4 +1,9 @@
-.center{
-    text-align: center;
-    margin: 50%;
+.knopki{
+    display: flex;
+    justify-content: space-between;
 }
+
+
+}
+
+
