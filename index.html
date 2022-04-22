@@ -1,24 +1,49 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AnonymousPoll</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/uikit.min.css" />
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
 </head>
+    
+
+
 <body>
-    <p><b>Создать опрос:</b><Br>
-            <textarea name="comment" cols="40" rows="3"></textarea></p>
-            <div class="option">
-            <p><input type="checkbox" name="a" value="mn"> Множественный вариант ответа</p>
-        <input type="radio" name="browser" value="1"> 1 вариант ответа<Br>
-        <input type="radio" name="browser" value="2"> 2 вариант ответа<Br>
-        <input type="radio" name="browser" value="3"> 3 вариант ответа<Br>
-       </p>
+   
+
+<div class="uk-margin-auto uk-margin-auto-vertical uk-width-1-2@s uk-card uk-card-default uk-card-body">
+
+    <b>Создать опрос:</b>
+    <Br>
+        <div class="uk-margin">
+            <textarea class="uk-textarea" rows="5" placeholder="Ваш вопрос"></textarea>
+        </div><Br>
+
+        <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+            <label><input class="uk-checkbox" type="checkbox" checked>Множественный вариант ответа</label>
+           
+        </div><Br>
+
+            <div class="uk-form-controls">
+                <label><input class="uk-radio" type="radio" name="radio1">1 вариант ответа </label><Br>
+                <label><input class="uk-radio" type="radio" name="radio1">2 вариант ответа </label><Br>
+                <label><input class="uk-radio" type="radio" name="radio1">3 вариант ответа </label><Br>
             </div>
-       <p> <input type="submit" value="Добавить вариант ответа">
+   
         
-        <input type="reset" value="Создать опрос"></p>
-      </form>
+            <div class="uk-margin">
+   <button class="uk-button uk-button-default">Добавить вариант ответа</button>
+   <button class="uk-button uk-button-default">Создать опрос</button>
+            </div>
+    
+
+
+   </div>
+   <script src="js/uikit-icons.js"></script>
+   <script src="js/uikit.js"></script>
+
 </body>
 </html>
