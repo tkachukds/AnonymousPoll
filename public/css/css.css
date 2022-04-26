@@ -3,7 +3,9 @@
     justify-content: space-between;
 }
 
-
+.inputradiotext {
+    resize: none;
+    border: none;
+    outline: none;
 }
-
 
