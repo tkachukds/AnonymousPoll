@@ -3,9 +3,8 @@
     justify-content: space-between;
 }
 
-.inputradiotext {
+.q-text {
     resize: none;
-    border: none;
     outline: none;
 }
 
