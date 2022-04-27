@@ -1,0 +1,21 @@
+.knopki{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.text_input_parametrs {
+    min-height: 40px;
+   max-height: 300px;
+    min-width: 300px;
+}
+
+.new_textarea_q {
+  margin-top: 50px;
+}
+
+.q-text{
+resize: horizontal;
+width: 40px;
+}
