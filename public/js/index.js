@@ -8,7 +8,7 @@ jQuery(function(){
 	jQuery('textarea').autoResize();
 });
 }
-
+q_t();
 let number_new_textarea=0; 
 let limit_new_textarea = 20;//сколько колличество раз можно создать вариант ответа
 function create_textarea() {  //создать вариант ответа-новую textarea
@@ -16,7 +16,7 @@ function create_textarea() {  //создать вариант ответа-но�
 			$("<textarea class='uk-textarea text_input_parametrs q-text' maxlength='512' placeholder='Вариант ответа' rows='1' cols='20' ></textarea>").insertBefore(".new_textarea_q");	
 			number_new_textarea++;
 			console.log(number_new_textarea);
-			q_t();
+			//q_t();
 		}
 	
 	}
