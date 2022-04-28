@@ -7,8 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/uikit.min.css" />
     <link rel="stylesheet" href="css/css.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="js/uikit.min.js"></script>
     <script src="js/uikit-icons.min.js"></script>
+    <script src="js/index.js"></script>
+    <script type="text/javascript" src="js_jquery-1.7.2.min.js"></script>
+    
+   
+   <script>
+       
+    </script>
 </head>
     
 
@@ -20,24 +28,28 @@
 
     <b>Создать опрос:</b>
         <div class="uk-margin">
-            <textarea class="uk-textarea" rows="5" placeholder="Ваш вопрос"></textarea>
+            <textarea class="uk-textarea" rows="1" placeholder="Поле для ввода" maxlength="2000"></textarea>
         </div>
 
         <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-            <label><input class="uk-checkbox" type="checkbox" checked>Множественный вариант ответа</label>
+            <label><input class="uk-checkbox" type="checkbox" checked>Можно выбрать несколько вариантов</label>
            
         </div>
 
             <div class="uk-form-controls">
-                <label><input class="uk-radio" type="radio" name="radio1">1 вариант ответа </label><Br>
-                <label><input class="uk-radio" type="radio" name="radio1">2 вариант ответа </label><Br>
-                <label><input class="uk-radio" type="radio" name="radio1">3 вариант ответа </label><Br>
-            </div>
-   
+ 
+        
+            <!-- <textarea class="q-text" style="color:red;" rows="1" placeholder="Вариант ответа" maxlength="512" cols="30px" ></textarea><br>
+            <textarea class="q-text" style="color:red;" rows="1" placeholder="Вариант ответа" maxlength="512" cols="30px" ></textarea><br>
+            <textarea class="q-text" style="color:red;" rows="1" placeholder="Вариант ответа" maxlength="512" cols="30px" ></textarea><br> -->
+                
+        
+   </div>
+            
         
             <div class="uk-margin" >
                 <div class="knopki" >
-   <button class="uk-button uk-button-default">Добавить вариант ответа</button> 
+   <button class="uk-button uk-button-default add_part button AddComment" >Добавить вариант ответа</button> 
    <button class="uk-button uk-button-default">Создать опрос</button>
             </div>
         </div>
