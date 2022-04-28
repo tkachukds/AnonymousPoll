@@ -20,9 +20,9 @@
     </script>
 </head>
 <body>
-    <div class="uk-margin">
-<div class="uk-margin-auto uk-margin-auto-vertical uk-width-1-2@s uk-card uk-card-default uk-card-body">
-    <b>Создать опрос:</b>
+    
+<div class="uk-margin-auto uk-margin-auto-vertical uk-width-1-2@s uk-card uk-card-default uk-card-body min-w uk-margin">
+   <b><div> Создать опрос:</div></b>
         <div class="uk-margin">
             <textarea class="uk-textarea text_input_parametrs" rows="1" placeholder="Ваш вопрос" maxlength="2000"></textarea>
         </div>
@@ -93,10 +93,11 @@
             <div class="uk-margin" >
     <div class="knopki" >
    <button class="uk-button uk-button-default add_part button AddComment" >Добавить вариант ответа</button> 
-   <button class="uk-button uk-button-default">Создать опрос</button>
+   <button class="uk-button uk-button-default" onclick="ajaxsend()">Создать опрос</button>
+ 
             </div>
         </div>
 </div>
-   </div>
+   
 </body>
 </html>
