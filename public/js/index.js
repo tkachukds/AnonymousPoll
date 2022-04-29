@@ -1,3 +1,70 @@
+function result_radio(){
+	$( ".result-total" ).show(1000);
+	$('.uk-radio').attr('disabled', true);
+}
+
+let ch_box = 0
+function changerbox(){
+	if (ch_box == 0) {
+	$( ".changerbox_dn" ).show(1000);
+	$( ".uk-radio" ).hide(1000);
+	ch_box = 1
+	} else {
+		$( ".changerbox_dn" ).hide(1000);
+		$( ".uk-radio" ).show(1000);
+		ch_box = 0
+	}
+}
+
+
+//скопировать в буфер
+function copyToClipboard() {
+    const str = document.getElementById('item-to-copy').innerText;
+    const el = document.createElement('textarea');
+    el.value = str;
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+}
+//
+
+function ajaxsend(){
+	
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	  {// код для IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// код для IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		document.getElementById("first_text").innerHTML=xmlhttp.responseText;
+		}
+	  }
+	xmlhttp.open("GET","ajax.txt",true); // true - используем АСИНХРОННУЮ передачу
+	xmlhttp.send();
+	
+}
+
+// async function getResponce() {
+// let responce  = await fetch('index.json');	
+// let content = await responce.json
+// console.log(responce);
+// }
+
+// getResponce();
+
+
+//
 jQuery.noConflict()(function ($) { //чтобы не было ошибок из-за доллара
 	$(document).ready(function(){//dom прочитан
 
@@ -68,7 +135,16 @@ function create_textarea() {  //создать вариант ответа-но�
 //кнопка добавить вариант овтета
 $(".AddComment").click(function () {
 create_textarea();
+
 });
+
+$(".result-radio").click(function () {
+	result_radio();
+});
+$("#changerbox").click(function () {
+	changerbox();
+});
+
 //конец, печатать
 })
 });
