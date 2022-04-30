@@ -1,3 +1,43 @@
+//server
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    function req() {
+    const request = new XMLHttpRequest();
+    request.open("GET", "http://localhost:3000/poll") ;
+    request.setRequestHeader("Content-type", 'application/json; charset=utf-8') ;
+    request.send();
+    request.addEventListener("load" , function() {
+    
+    if (request.readyState === 4 && request.status == 200)
+    {
+        let data = JSON.parse(request.response);
+        console.log(data);
+//
+        data.forEach(item => {
+            let card = document.createElement('div');
+            
+            card.classList.add('card');
+            
+            card.innerHTML = `
+			<div id="first_text" class="poll"> ${item.name}</div> <br>
+			<label><input class="uk-radio result-radio" type="radio" onclick="result_radio()" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> ${item.val1} <b class="result-total">${item.res_val1}%</b></label><Br>
+			<label><input class="uk-radio result-radio" type="radio" onclick="result_radio()" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> ${item.val2} <b class="result-total">${item.res_val2}%</b></label><Br>
+			<label><input class="uk-radio result-radio" type="radio" onclick="result_radio()" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> ${item.val3} <b class="result-total">${item.res_val3}%</b></label><Br>
+            `;
+            document.querySelector('.q_s_text').appendChild(card);
+        });
+// <img src="${item.photo}" alt="">
+    } else {
+        console.error('Брат, щото нитак')
+    }
+    });
+}
+
+    req();
+});
+//
+
 function result_radio(){
 	$( ".result-total" ).show(1000);
 	$('.uk-radio').attr('disabled', true);
@@ -32,28 +72,6 @@ function copyToClipboard() {
 }
 //
 
-function ajaxsend(){
-	
-	var xmlhttp;
-	if (window.XMLHttpRequest)
-	  {// код для IE7+, Firefox, Chrome, Opera, Safari
-	  xmlhttp=new XMLHttpRequest();
-	  }
-	else
-	  {// код для IE6, IE5
-	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-	xmlhttp.onreadystatechange=function()
-	  {
-	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-		{
-		document.getElementById("first_text").innerHTML=xmlhttp.responseText;
-		}
-	  }
-	xmlhttp.open("GET","ajax.txt",true); // true - используем АСИНХРОННУЮ передачу
-	xmlhttp.send();
-	
-}
 
 // async function getResponce() {
 // let responce  = await fetch('index.json');	
@@ -81,6 +99,7 @@ q_t();
 let number_new_textarea=1; 
 let limit_new_textarea = 20;//сколько колличество раз можно создать вариант ответа
 function create_textarea() {  //создать вариант ответа-новую textarea
+	//да-да через массив почему-то не работает. допилю на новых версиях
 		if (number_new_textarea<limit_new_textarea){
 			number_new_textarea++;
 			if (number_new_textarea == 2)
@@ -138,9 +157,9 @@ create_textarea();
 
 });
 
-$(".result-radio").click(function () {
-	result_radio();
-});
+// $(".result-radio").click(function () {
+// 	result_radio();
+// }); а вот не работает на новосозданных классах
 $("#changerbox").click(function () {
 	changerbox();
 });
