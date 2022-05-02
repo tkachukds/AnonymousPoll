@@ -1,6 +1,23 @@
 let number_new_textarea=1; 
 let limit_new_textarea = 20;//сколько колличество раз можно создать вариант ответа
+let more_q_number = 0; // кнопка множественный варинт ответа нажата = 1, нет = 0
 
+
+//достаем все из юрл
+function getUrlVars() { 
+	var vars = {};
+	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+	vars[key] = value;
+	});
+	return vars;
+	}
+	//id json 
+var first = getUrlVars()["id"];
+let q_id = '?id='+first;
+
+//
+let linknow = window.location.href;
+document.getElementById("item-to-copy").innerHTML = linknow;
 //server
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -50,7 +67,8 @@ $.post('http://localhost:3000/poll',{
 	val18:val18,
 	val19:val19,
 	val20:val20,
-	q_val:number_new_textarea
+	q_val:number_new_textarea,
+	moreq:more_q_number
 },function(responce){
 $('#responce').html()
 })
@@ -58,7 +76,7 @@ $('#responce').html()
 //
     function req() {
     const request = new XMLHttpRequest();
-    request.open("GET", "http://localhost:3000/poll") ;
+    request.open("GET", "http://localhost:3000/poll"+q_id) ;
     request.setRequestHeader("Content-type", 'application/json; charset=utf-8') ;
     request.send();
     request.addEventListener("load" , function() {
@@ -66,24 +84,27 @@ $('#responce').html()
     if (request.readyState === 4 && request.status == 200)
     {
         let data = JSON.parse(request.response);
-        console.log(data);
+        //console.log(data);
 //
         data.forEach(item => {
-            let card = document.createElement('div');
-            
-            card.classList.add('card');
-            
-            card.innerHTML = `
-			<div id="first_text" class="poll"> ${item.name}</div> <br>
-			<label><input class="uk-radio result-radio" type="radio" onclick="result_radio()" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> ${item.val1} <b class="result-total">${item.res_val1}%</b></label><Br>
+			let qii = 1
+			let = LoadMoreQ = item.moreq; //загрузка - множественный вариант ответа ?
+            var q_poll= document.querySelector('.q_poll');
+            first_text.innerHTML = `
+			<div id="first_text" class="poll"> ${item.name}</div>`;
+			q_poll.innerHTML = 
+			`<label><input class="uk-radio result-radio" type="radio" onclick="result_radio()" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> ${item.val1} <b class="result-total">${item.res_val1}%</b></label><Br>
 			<label><input class="uk-radio result-radio" type="radio" onclick="result_radio()" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> ${item.val2} <b class="result-total">${item.res_val2}%</b></label><Br>
 			<label><input class="uk-radio result-radio" type="radio" onclick="result_radio()" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> ${item.val3} <b class="result-total">${item.res_val3}%</b></label><Br>
             `;
-            document.querySelector('.q_s_text').appendChild(card);
+            document.querySelector('.q_s_text').appendChild(q_poll);
+			if (LoadMoreQ == 1)
+				changerbox(); //изменить на фладки или чекбокс
+			
         });
 // <img src="${item.photo}" alt="">
     } else {
-        console.error('Брат, щото нитак')
+        console.error('Брат, щото нитак с сервером')
     }
     });
 }
@@ -213,8 +234,18 @@ create_textarea();
 // $(".result-radio").click(function () {
 // 	result_radio();
 // }); а вот не работает на новосозданных классах
-$("#changerbox").click(function () {
-	changerbox();
+
+
+$("#more_q").click(function () {
+	if (more_q_number == 0) {
+		
+		more_q_number = 1
+
+		console.log('множественный вариант ответа '+more_q_number);
+		} else {
+			more_q_number = 0
+			console.log('множественный вариант ответа '+more_q_number);
+		}
 });
 
 //конец, печатать

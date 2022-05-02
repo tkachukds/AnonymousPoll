@@ -15,7 +15,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
     <script src="js/uikit.min.js"></script>
     <script src="js/uikit-icons.min.js"></script>
-    <script src="js/index.js"></script>
+    
    <script>
     </script>
 </head>
@@ -24,17 +24,17 @@
     <div class="uk-margin-auto uk-margin-auto-vertical uk-width-1-2@s uk-card uk-card-default uk-card-body min-w uk-margin">
     
     <p ><b>Опрос:</b><Br> </p>
-        <label><input id="changerbox" class="uk-checkbox" type="checkbox"> Можно выбрать несколько вариантов</label><br>
         <div class="q_s_text">  
 
 
-        <!-- <div id="first_text" class="poll">Любите ли вы жрать?</div> <br>
+         <div id="first_text" class="poll">Загрузка вопроса...</div> <br>
 
-           <div class="uk-form-controls ">
-            <label><input class="uk-radio result-radio" type="radio" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> Да <b class="result-total">98%</b></label><Br>
+           <div class="q_poll">
+            <!-- <label><input class="uk-radio result-radio" type="radio" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> Да <b class="result-total">98%</b></label><Br>
             <label><input class="uk-radio result-radio" type="radio" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> Ооо да <b class="result-total">1%</b></label><Br>
-            <label><input class="uk-radio result-radio" type="radio" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> Кто здесь? <b class="result-total">1%</b></label><Br>
-        </div> -->
+            <label><input class="uk-radio result-radio" type="radio" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> Кто здесь? <b class="result-total">1%</b></label><Br> -->
+        загрузка ответов
+            </div> 
 
 
     </div> 
@@ -46,8 +46,10 @@
 
         </div>
             <div class="link scale-05">
-        <p id="item-to-copy" type="text"> здесь будет видна ссылка на опрос 
-    <button onclick="copyToClipboard()" class="uk-button uk-button-default ">Скопировать ссылку на опрос</button></p>
+                <br>
+                <label><b>Ссылка на опрос: </b> </label>
+        <p id="item-to-copy" class="textlink" type="text">  Загрузка ссылки на опрос </p>
+    <button onclick="copyToClipboard()" class="uk-button uk-button-default ">Скопировать ссылку на опрос</button>
     </div>
     </div>
 
@@ -55,6 +57,6 @@
 </div>
 
 
-
+<script src="js/index.js"></script>
 </body>
 </html>
