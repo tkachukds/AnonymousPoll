@@ -19,3 +19,22 @@
 resize: horizontal;
 width: 40px;
 }
+
+
+.scale-05{
+  transform: scale(0.7);
+  margin: 0px;
+  text-align: center;
+}
+
+.min-w{
+  min-width: 500px;
+}
+
+.result-total{
+display: none;
+}
+
+.changerbox_dn{
+  display: none;
+}
