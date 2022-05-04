@@ -1,6 +1,6 @@
 let number_new_textarea=1; 
 let limit_new_textarea = 20;//сколько колличество раз можно создать вариант ответа
-let more_q_number = 0; // кнопка множественный варинт ответа нажата = 1, нет = 0
+let more_q_number = 0; // кнопка множественный варинт ответа нажата = 1, нет = 0/ при загрузке
 
 
 //достаем все из юрл
@@ -15,10 +15,10 @@ function getUrlVars() {
 var first = getUrlVars()["id"];
 let q_id = '?id='+first;
 
-//
+//ссылка внизу
 let linknow = window.location.href;
 document.getElementById("item-to-copy").innerHTML = linknow;
-//server
+//server сохранение опроса
 
 window.addEventListener("DOMContentLoaded", () => {
 
@@ -68,12 +68,33 @@ $.post('http://localhost:3000/poll',{
 	val19:val19,
 	val20:val20,
 	q_val:number_new_textarea,
-	moreq:more_q_number
-},function(responce){
-$('#responce').html()
+	moreq:more_q_number,
+	res_val1:0,
+	res_val2:0,
+	res_val3:0,
+	res_val4:0,
+	res_val5:0,
+	res_val6:0,
+	res_val7:0,
+	res_val8:0,
+	res_val9:0,
+	res_val10:0,
+	res_val11:0,
+	res_val12:0,
+	res_val13:0,
+	res_val14:0,
+	res_val15:0,
+	res_val16:0,
+	res_val17:0,
+	res_val18:0,
+	res_val19:0,
+	res_val20:0
+},function(data) { 
+    console.log(data.id); // ответ от сервера
+	document.location.href = "index 2.html?id="+data.id;
 })
 })
-//
+// загрузка опроса
     function req() {
     const request = new XMLHttpRequest();
     request.open("GET", "http://localhost:3000/poll"+q_id) ;
@@ -84,25 +105,28 @@ $('#responce').html()
     if (request.readyState === 4 && request.status == 200)
     {
         let data = JSON.parse(request.response);
-        //console.log(data);
-//
         data.forEach(item => {
-			let qii = 1
 			let = LoadMoreQ = item.moreq; //загрузка - множественный вариант ответа ?
-            var q_poll= document.querySelector('.q_poll');
             first_text.innerHTML = `
 			<div id="first_text" class="poll"> ${item.name}</div>`;
-			q_poll.innerHTML = 
-			`<label><input class="uk-radio result-radio" type="radio" onclick="result_radio()" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> ${item.val1} <b class="result-total">${item.res_val1}%</b></label><Br>
-			<label><input class="uk-radio result-radio" type="radio" onclick="result_radio()" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> ${item.val2} <b class="result-total">${item.res_val2}%</b></label><Br>
-			<label><input class="uk-radio result-radio" type="radio" onclick="result_radio()" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> ${item.val3} <b class="result-total">${item.res_val3}%</b></label><Br>
-            `;
-            document.querySelector('.q_s_text').appendChild(q_poll);
+			let qval = [item.val1, item.val2, item.val3, item.val4, item.val5, item.val6, item.val7, item.val8, item.val9, item.val10, item.val11, item.val12, item.val13, item.val14, item.val15, item.val16, item.val17, item.val18, item.val19, item.val20];
+			let qresval = [item.res_val1, item.res_val2, item.res_val3, item.res_val4, item.res_val5, item.res_val6, item.res_val7, item.res_val8, item.res_val9, item.res_val10, item.res_val11, item.res_val12, item.res_val13, item.res_val14, item.res_val15, item.res_val16, item.res_val17, item.res_val18, item.res_val19, item.res_val20]
+			let q_otvet = item.q_val;
+			for (let i = 0; i < q_otvet; i++) {
+				qvals=qval[i];
+				qresvals = qresval[i]
+				let qdiv = [];
+				qdiv[i] = document.createElement('div');
+				qdiv[i].innerHTML = 
+				`<label class="rov${i}"><input class="uk-radio result-radio" type="radio" onclick="result_radio()" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> ${qvals}  <b class="result-total">  ${qresvals}%</b></label><Br>
+				`;
+				document.querySelector('.q_poll').appendChild(qdiv[i]);
+				console.log(i);
+	}
 			if (LoadMoreQ == 1)
 				changerbox(); //изменить на фладки или чекбокс
 			
         });
-// <img src="${item.photo}" alt="">
     } else {
         console.error('Брат, щото нитак с сервером')
     }
@@ -223,19 +247,12 @@ function create_textarea() {  //создать вариант ответа-но�
 		}
 	
 	}
-//анимируем начало			               }
 
 //кнопка добавить вариант овтета
 $(".AddComment").click(function () {
 create_textarea();
 
 });
-
-// $(".result-radio").click(function () {
-// 	result_radio();
-// }); а вот не работает на новосозданных классах
-
-
 $("#more_q").click(function () {
 	if (more_q_number == 0) {
 		
@@ -248,6 +265,14 @@ $("#more_q").click(function () {
 		}
 });
 
+
+function vote_in_the_poll(){
+
+}
+
+function create_poll(){
+
+}
 //конец, печатать
 })
 });
