@@ -1,8 +1,7 @@
 let number_new_textarea=1; 
 let limit_new_textarea = 20;//сколько колличество раз можно создать вариант ответа
 let more_q_number = 0; // кнопка множественный варинт ответа нажата = 1, нет = 0/ при загрузке
-
-
+let server = 'http://localhost:3000/poll';
 //достаем все из юрл
 function getUrlVars() { 
 	var vars = {};
@@ -12,16 +11,15 @@ function getUrlVars() {
 	return vars;
 	}
 	//id json 
-var first = getUrlVars()["id"];
+var first = getUrlVars()["id"]; // только id
 let q_id = '?id='+first;
-
+let serverid = server+q_id;
+let serverSleshId = server+'/'+first;
 //ссылка внизу
 let linknow = window.location.href;
 document.getElementById("item-to-copy").innerHTML = linknow;
 //server сохранение опроса
-
 window.addEventListener("DOMContentLoaded", () => {
-
 $("#submitetn").click(function() {
 var name = $("#name").val();
 var val1 = $(".new_teaxtarea1").val();
@@ -45,7 +43,7 @@ var val18 = $(".new_teaxtarea18").val();
 var val19 = $(".new_teaxtarea19").val();
 var val20 = $(".new_teaxtarea20").val();
 
-$.post('http://localhost:3000/poll',{
+$.post(''+server,{
 	name:name,
 	val1:val1,
 	val2:val2,
@@ -94,54 +92,8 @@ $.post('http://localhost:3000/poll',{
 	document.location.href = "index 2.html?id="+data.id;
 })
 })
-// загрузка опроса
-    function req() {
-    const request = new XMLHttpRequest();
-    request.open("GET", "http://localhost:3000/poll"+q_id) ;
-    request.setRequestHeader("Content-type", 'application/json; charset=utf-8') ;
-    request.send();
-    request.addEventListener("load" , function() {
-    
-    if (request.readyState === 4 && request.status == 200)
-    {
-        let data = JSON.parse(request.response);
-        data.forEach(item => {
-			let = LoadMoreQ = item.moreq; //загрузка - множественный вариант ответа ?
-            first_text.innerHTML = `
-			<div id="first_text" class="poll"> ${item.name}</div>`;
-			let qval = [item.val1, item.val2, item.val3, item.val4, item.val5, item.val6, item.val7, item.val8, item.val9, item.val10, item.val11, item.val12, item.val13, item.val14, item.val15, item.val16, item.val17, item.val18, item.val19, item.val20];
-			let qresval = [item.res_val1, item.res_val2, item.res_val3, item.res_val4, item.res_val5, item.res_val6, item.res_val7, item.res_val8, item.res_val9, item.res_val10, item.res_val11, item.res_val12, item.res_val13, item.res_val14, item.res_val15, item.res_val16, item.res_val17, item.res_val18, item.res_val19, item.res_val20]
-			let q_otvet = item.q_val;
-			for (let i = 0; i < q_otvet; i++) {
-				qvals=qval[i];
-				qresvals = qresval[i]
-				let qdiv = [];
-				qdiv[i] = document.createElement('div');
-				qdiv[i].innerHTML = 
-				`<label class="rov${i}"><input class="uk-radio result-radio" type="radio" onclick="result_radio()" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> ${qvals}  <b class="result-total">  ${qresvals}%</b></label><Br>
-				`;
-				document.querySelector('.q_poll').appendChild(qdiv[i]);
-				console.log(i);
-	}
-			if (LoadMoreQ == 1)
-				changerbox(); //изменить на фладки или чекбокс
-			
-        });
-    } else {
-        console.error('Брат, щото нитак с сервером')
-    }
-    });
-}
-
-    req();
 });
 //
-
-function result_radio(){
-	$( ".result-total" ).show(1000);
-	$('.uk-radio').attr('disabled', true);
-}
-
 let ch_box = 0
 function changerbox(){
 	if (ch_box == 0) {
@@ -154,8 +106,6 @@ function changerbox(){
 		ch_box = 0
 	}
 }
-
-
 //скопировать в буфер
 function copyToClipboard() {
     const str = document.getElementById('item-to-copy').innerText;
@@ -169,20 +119,6 @@ function copyToClipboard() {
     document.execCommand('copy');
     document.body.removeChild(el);
 }
-//
-
-
-// async function getResponce() {
-// let responce  = await fetch('index.json');	
-// let content = await responce.json
-// console.log(responce);
-// }
-
-// getResponce();
-
-
-//
-jQuery.noConflict()(function ($) { //чтобы не было ошибок из-за доллара
 	$(document).ready(function(){//dom прочитан
 
 		//авторазмер текстареа
@@ -265,15 +201,11 @@ $("#more_q").click(function () {
 		}
 });
 
-
-function vote_in_the_poll(){
-
-}
-
-function create_poll(){
-
-}
+$(".VotePoll").click(function () {
+	vote_in_the_poll();
+	});
+//
 //конец, печатать
 })
-});
+
 
