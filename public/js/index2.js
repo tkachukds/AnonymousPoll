@@ -44,17 +44,17 @@ function result_radio(){
 			if (LoadMoreQ == 1)
 				changerbox(); //изменить на фладки или чекбокс
 
-                if(loadlocaldata.golosoval == '1'){
+                if(loadlocaldata.voted == '1'){
                   //  console.log('локальное хранилище айди '+loadlocaldata.id);
-                  //  console.log('локальное хранилище голосовал? /'+loadlocaldata.golosoval);
+                  //  console.log('локальное хранилище голосовал? /'+loadlocaldata.voted);
                  result_radio();
               
                 }
-                if(loadlocaldata.golos_za > 0){
-                    console.log('голосовал за ' + loadlocaldata.golos_za);
-                    //alert('Вы уже голосовали. Вы выбрали: '+loadlocaldata.golos_za+' вариант')
-                    const golos_ = document.getElementById("golos_za");
-                    golos_.innerHTML = 'Вы уже проголосовали. Вы выбрали: '+loadlocaldata.golos_za+' вариант.';
+                if(loadlocaldata.votedFor > 0){
+                    console.log('голосовал за ' + loadlocaldata.votedFor);
+                    //alert('Вы уже голосовали. Вы выбрали: '+loadlocaldata.votedFor+' вариант')
+                    const voted_ = document.getElementById("votedFor");
+                    voted_.innerHTML = 'Вы уже голосовали. Ваш выбор пал на '+loadlocaldata.votedFor+' вариант.';
                   }
         });
     } else {
@@ -62,7 +62,7 @@ function result_radio(){
     }
     });
 
-    function vote_in_the_poll(){
+    function clickVotePoll(){
         if (request.readyState === 4 && request.status == 200)
         {
             let data = JSON.parse(request.response);
@@ -84,7 +84,7 @@ function result_radio(){
         //let data_push = 'res_val'+orig_resvol+':'+pluss_res;
         //console.log('загрузим '+data_push);
         
-        let data_push2 = {};
+        let data_push2 = {}; // увы и ах, только так. Иначе ошибка патча. При цикле или даже просто если внести в переменную данные
      if(orig_resvol ==1)data_push2 = {res_val1:pluss_res};
      if(orig_resvol ==2)data_push2 = {res_val2:pluss_res};
      if(orig_resvol ==3)data_push2 = {res_val3:pluss_res};
@@ -106,7 +106,7 @@ function result_radio(){
      if(orig_resvol ==19)data_push2 = {res_val19:pluss_res};
      if(orig_resvol ==20)data_push2 = {res_val20:pluss_res};
 //сохраним в локальное хранилище перед патчем. иначе пока не получается
-let data_local = {id: first, golosoval: 1, golos_za: orig_resvol};
+let data_local = {id: first, voted: 1, votedFor: orig_resvol};
 let json = JSON.stringify(data_local);
 localStorage.setItem('data_local_'+first, json)
 console.log(json);

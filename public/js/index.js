@@ -202,7 +202,7 @@ $("#more_q").click(function () {
 });
 
 $(".VotePoll").click(function () {
-	vote_in_the_poll();
+	clickVotePoll();
 	});
 //
 //конец, печатать
