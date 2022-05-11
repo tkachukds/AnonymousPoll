@@ -1,8 +1,7 @@
 let number_new_textarea=1; 
 let limit_new_textarea = 20;//сколько колличество раз можно создать вариант ответа
-let more_q_number = 0; // кнопка множественный варинт ответа нажата = 1, нет = 0
-
-
+let more_q_number = 0; // кнопка множественный варинт ответа нажата = 1, нет = 0/ при загрузке
+let server = 'http://localhost:3000/poll';
 //достаем все из юрл
 function getUrlVars() { 
 	var vars = {};
@@ -12,16 +11,15 @@ function getUrlVars() {
 	return vars;
 	}
 	//id json 
-var first = getUrlVars()["id"];
+var first = getUrlVars()["id"]; // только id
 let q_id = '?id='+first;
-
-//
+let serverid = server+q_id;
+let serverSleshId = server+'/'+first;
+//ссылка внизу
 let linknow = window.location.href;
 document.getElementById("item-to-copy").innerHTML = linknow;
-//server
-
+//server сохранение опроса
 window.addEventListener("DOMContentLoaded", () => {
-
 $("#submitetn").click(function() {
 var name = $("#name").val();
 var val1 = $(".new_teaxtarea1").val();
@@ -45,7 +43,7 @@ var val18 = $(".new_teaxtarea18").val();
 var val19 = $(".new_teaxtarea19").val();
 var val20 = $(".new_teaxtarea20").val();
 
-$.post('http://localhost:3000/poll',{
+$.post(''+server,{
 	name:name,
 	val1:val1,
 	val2:val2,
@@ -68,56 +66,34 @@ $.post('http://localhost:3000/poll',{
 	val19:val19,
 	val20:val20,
 	q_val:number_new_textarea,
-	moreq:more_q_number
-},function(responce){
-$('#responce').html()
+	moreq:more_q_number,
+	res_val1:0,
+	res_val2:0,
+	res_val3:0,
+	res_val4:0,
+	res_val5:0,
+	res_val6:0,
+	res_val7:0,
+	res_val8:0,
+	res_val9:0,
+	res_val10:0,
+	res_val11:0,
+	res_val12:0,
+	res_val13:0,
+	res_val14:0,
+	res_val15:0,
+	res_val16:0,
+	res_val17:0,
+	res_val18:0,
+	res_val19:0,
+	res_val20:0
+},function(data) { 
+    console.log(data.id); // ответ от сервера
+	document.location.href = "index 2.html?id="+data.id;
 })
 })
-//
-    function req() {
-    const request = new XMLHttpRequest();
-    request.open("GET", "http://localhost:3000/poll"+q_id) ;
-    request.setRequestHeader("Content-type", 'application/json; charset=utf-8') ;
-    request.send();
-    request.addEventListener("load" , function() {
-    
-    if (request.readyState === 4 && request.status == 200)
-    {
-        let data = JSON.parse(request.response);
-        //console.log(data);
-//
-        data.forEach(item => {
-			let qii = 1
-			let = LoadMoreQ = item.moreq; //загрузка - множественный вариант ответа ?
-            var q_poll= document.querySelector('.q_poll');
-            first_text.innerHTML = `
-			<div id="first_text" class="poll"> ${item.name}</div>`;
-			q_poll.innerHTML = 
-			`<label><input class="uk-radio result-radio" type="radio" onclick="result_radio()" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> ${item.val1} <b class="result-total">${item.res_val1}%</b></label><Br>
-			<label><input class="uk-radio result-radio" type="radio" onclick="result_radio()" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> ${item.val2} <b class="result-total">${item.res_val2}%</b></label><Br>
-			<label><input class="uk-radio result-radio" type="radio" onclick="result_radio()" name="radio1"><input id="changerbox" class="uk-checkbox changerbox_dn" type="checkbox"> ${item.val3} <b class="result-total">${item.res_val3}%</b></label><Br>
-            `;
-            document.querySelector('.q_s_text').appendChild(q_poll);
-			if (LoadMoreQ == 1)
-				changerbox(); //изменить на фладки или чекбокс
-			
-        });
-// <img src="${item.photo}" alt="">
-    } else {
-        console.error('Брат, щото нитак с сервером')
-    }
-    });
-}
-
-    req();
 });
 //
-
-function result_radio(){
-	$( ".result-total" ).show(1000);
-	$('.uk-radio').attr('disabled', true);
-}
-
 let ch_box = 0
 function changerbox(){
 	if (ch_box == 0) {
@@ -130,8 +106,6 @@ function changerbox(){
 		ch_box = 0
 	}
 }
-
-
 //скопировать в буфер
 function copyToClipboard() {
     const str = document.getElementById('item-to-copy').innerText;
@@ -145,20 +119,6 @@ function copyToClipboard() {
     document.execCommand('copy');
     document.body.removeChild(el);
 }
-//
-
-
-// async function getResponce() {
-// let responce  = await fetch('index.json');	
-// let content = await responce.json
-// console.log(responce);
-// }
-
-// getResponce();
-
-
-//
-jQuery.noConflict()(function ($) { //чтобы не было ошибок из-за доллара
 	$(document).ready(function(){//dom прочитан
 
 		//авторазмер текстареа
@@ -223,19 +183,12 @@ function create_textarea() {  //создать вариант ответа-но�
 		}
 	
 	}
-//анимируем начало			               }
 
 //кнопка добавить вариант овтета
 $(".AddComment").click(function () {
 create_textarea();
 
 });
-
-// $(".result-radio").click(function () {
-// 	result_radio();
-// }); а вот не работает на новосозданных классах
-
-
 $("#more_q").click(function () {
 	if (more_q_number == 0) {
 		
@@ -248,7 +201,11 @@ $("#more_q").click(function () {
 		}
 });
 
+$(".VotePoll").click(function () {
+	clickVotePoll();
+	});
+//
 //конец, печатать
 })
-});
+
 
